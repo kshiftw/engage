@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, Image } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 
 export default class Navbar extends PureComponent {
 	state = { activeItem: 'home' };
@@ -9,13 +9,12 @@ export default class Navbar extends PureComponent {
 	render() {
 		const { activeItem } = this.state;
 
-		const { selfUser, setSelfUser, inLobby } = this.props;
+		const { selfUser, setSelfUser } = this.props;
 
 		return (
 			<div>
 				<Menu
-					pointing
-					secondary
+					tabular
 					// style={{ fontSize: '120%' }}
 					className='navbar_items'
 				>
@@ -42,6 +41,18 @@ export default class Navbar extends PureComponent {
 						>
 							About
 						</Menu.Item>
+						{selfUser ? (
+							<Menu.Item
+								as={NavLink}
+								exact
+								to='/grow'
+								name='grow'
+								active={activeItem === 'grow'}
+								onClick={this.handleItemClick}
+							>
+								Grow
+							</Menu.Item>
+						) : null}
 						{selfUser ? (
 							<Menu.Item
 								as={NavLink}

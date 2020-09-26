@@ -1,5 +1,4 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Button } from 'semantic-ui-react';
 
 export default class Landing extends PureComponent {

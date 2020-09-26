@@ -9,6 +9,7 @@ import Login from './Login';
 import Profile from './Profile';
 import Register from './Register';
 import About from './About';
+import Grow from './Grow';
 
 export default class App extends PureComponent {
 	constructor(props) {
@@ -112,6 +113,13 @@ export default class App extends PureComponent {
 							path='/profile'
 							render={(props) => (
 								<Profile {...props} apiPath={apiPath} selfUser={selfUser} />
+							)}
+						/>
+						<Route
+							exact
+							path='/grow'
+							render={(props) => (
+								<Grow {...props} apiPath={apiPath} selfUser={selfUser} />
 							)}
 						/>
 						<Route
