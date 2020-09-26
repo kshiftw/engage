@@ -7,6 +7,6 @@ const router = express.Router();
 
 require('./register')(router);
 require('./login')(router);
-// require('./profile')(router);
+require('./profile')(router);
 
 module.exports = router;
