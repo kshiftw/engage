@@ -1,6 +1,6 @@
 # engage
 
-### Commands
+### Commands & Setup
 Main directory: Run Server
 - npm install 
 	->downloads dependencies on local machine
@@ -13,8 +13,8 @@ Main directory: Run Server
 - npm start
 - enter localhost:3000 on browser
 
-- create .env file
-	- same content as .env.sample file
+create .env file
+- same content as .env.sample file
 
 Need to make sure MongoDB is running
 - cd C:\Program Files\MongoDB\Server\4.2\bin
