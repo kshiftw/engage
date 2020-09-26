@@ -20,6 +20,7 @@ Main directory: Run Server
 
 /frontend: Run frontend
 - cd frontend
+- npm install
 - npm start
 - enter localhost:3000 on browser
 
