@@ -1,21 +1,35 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Container, Button, Input } from 'semantic-ui-react';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { Container, Button, Input, Card, Image } from 'semantic-ui-react';
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import NumericInput from 'react-numeric-input';
-import Countdown from 'react-countdown';
 import 'react-circular-progressbar/dist/styles.css';
+
+import Tree0 from './images/tree_0.JPG';
+import Tree1 from './images/tree_1.JPG';
+import Tree2 from './images/tree_2.JPG';
+import Tree3 from './images/tree_3.JPG';
+import Tree4 from './images/tree_4.JPG';
+import Tree5 from './images/tree_5.JPG';
 
 export default class Grow extends PureComponent {
 	constructor(props) {
 		super(props);
+		this.tick = this.tick.bind(this);
+		this.startCountDown = this.startCountDown.bind(this);
+		this.resetTimer = this.resetTimer.bind(this);
 	}
 
 	state = {
-		timer: 0,
+		timer_set: 0,
+		timer_remaining: 0,
 		timer_percentage: 0,
+		hour_remaining: 0,
+		minute_remaining: 0,
+		second_remaining: 0,
 		hour: 0,
 		minute: 0,
+		timer_started: false,
 	};
 
 	onHourChange(event) {
@@ -26,41 +40,105 @@ export default class Grow extends PureComponent {
 		this.setState({ minute: event });
 	}
 
-	onCountdownChange(event) {
-		const { timer } = this.state;
-		let time_left = event.total;
-		let new_timer_percentage = parseInt(((timer - time_left) / timer) * 100);
+	tick() {
+		this.setState((prevState) => {
+			return { timer_remaining: prevState.timer_remaining - 1000 };
+		});
+
+		const { timer_set, timer_remaining } = this.state;
+
+		if (timer_remaining <= 0) {
+			clearInterval(this.intervalHandle);
+		}
+
+		// https://stackoverflow.com/questions/19700283/how-to-convert-time-milliseconds-to-hours-min-sec-format-in-javascript
+		let minutes = Math.floor((timer_remaining / (1000 * 60)) % 60);
+		let hours = Math.floor((timer_remaining / (1000 * 60 * 60)) % 24);
+		let seconds = Math.floor((timer_remaining / 1000) % 60);
+		hours = hours < 10 ? '0' + hours : hours;
+		minutes = minutes < 10 ? '0' + minutes : minutes;
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+
+		let new_timer_percentage = parseInt(
+			((timer_set - timer_remaining) / timer_set) * 100
+		);
+
+		if (new_timer_percentage < 2) {
+			new_timer_percentage = 1;
+		}
+
 		this.setState({
 			timer_percentage: new_timer_percentage,
+			hour_remaining: hours,
+			minute_remaining: minutes,
+			second_remaining: seconds,
 		});
 	}
 
-	onStart() {
-		console.log('in start');
+	startCountDown() {
 		const { hour, minute } = this.state;
 		let new_timer = hour * 3600000 + minute * 60000;
 		this.setState({
-			timer: new_timer,
+			timer_set: new_timer,
+			timer_remaining: new_timer,
+			timer_started: true,
+		});
+
+		this.intervalHandle = setInterval(this.tick, 200);
+	}
+
+	resetTimer() {
+		clearInterval(this.intervalHandle);
+
+		this.setState({
+			timer_remaining: 0,
+			timer_percentage: 0,
+			hour_remaining: 0,
+			minute_remaining: 0,
+			second_remaining: 0,
+			timer_started: false,
 		});
 	}
 
 	render() {
 		const { selfUser } = this.props;
-		const { timer, timer_percentage } = this.state;
+		const {
+			timer_percentage,
+			hour_remaining,
+			minute_remaining,
+			second_remaining,
+			timer_started,
+		} = this.state;
 		// if (!selfUser) {
 		// 	return <Redirect to='/' />;
 		// }
+
+		let tree;
+		if (timer_percentage >= 0 && timer_percentage < 20) {
+			tree = <Image size='medium' circular src={Tree0}></Image>;
+		} else if (timer_percentage >= 20 && timer_percentage < 40) {
+			tree = <Image size='medium' circular src={Tree1}></Image>;
+		} else if (timer_percentage >= 40 && timer_percentage < 60) {
+			tree = <Image size='medium' circular src={Tree2}></Image>;
+		} else if (timer_percentage >= 60 && timer_percentage < 80) {
+			tree = <Image size='medium' circular src={Tree3}></Image>;
+		} else if (timer_percentage >= 80 && timer_percentage < 99) {
+			tree = <Image size='medium' circular src={Tree4}></Image>;
+		} else if (timer_percentage >= 99) {
+			tree = <Image size='medium' circular src={Tree5}></Image>;
+		}
+
 		return (
 			<Fragment>
 				<h1>Grow</h1>
-				<Countdown
-					date={Date.now() + timer}
-					onTick={this.onCountdownChange.bind(this)}
-				/>
-				<p>
-					{timer}
-					{timer_percentage}
-				</p>
+
+				{timer_started ? (
+					<p>
+						{hour_remaining}:{minute_remaining}:{second_remaining}{' '}
+					</p>
+				) : (
+					<p>00:00:00</p>
+				)}
 				<p>
 					Hours &nbsp;
 					<NumericInput
@@ -80,16 +158,34 @@ export default class Grow extends PureComponent {
 					/>
 				</p>
 				<p></p>
-				<Button onClick={this.onStart.bind(this)}>Start</Button>
-				<div style={{ width: '500px' }}>
-					<CircularProgressbar
+				{!timer_started ? (
+					<Button onClick={this.startCountDown}>Start</Button>
+				) : (
+					<Button disabled>Start</Button>
+				)}
+
+				{timer_started ? (
+					<Button onClick={this.resetTimer}>Reset</Button>
+				) : (
+					<Button disabled>Reset</Button>
+				)}
+
+				<div
+					style={{
+						width: '500px',
+						position: 'absolute',
+						left: '50%',
+						top: '50%',
+						transform: 'translate(-50%, -50%)',
+					}}
+				>
+					<CircularProgressbarWithChildren
 						value={timer_percentage}
 						strokeWidth={5}
-					></CircularProgressbar>
+					>
+						{tree}
+					</CircularProgressbarWithChildren>
 				</div>
-				<Container>
-					<p></p>
-				</Container>
 			</Fragment>
 		);
 	}
