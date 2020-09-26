@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Landing from './Landing';
 import Login from './Login';
 import Profile from './Profile';
+import EducationalLinks from './EducationalLinks';
 import Register from './Register';
 import About from './About';
 import Grow from './Grow';
@@ -120,6 +121,13 @@ export default class App extends PureComponent {
 							path='/grow'
 							render={(props) => (
 								<Grow {...props} apiPath={apiPath} selfUser={selfUser} />
+							)}
+						/>
+						<Route
+							exact
+							path='/EducationalLinks'
+							render={(props) => (
+								<EducationalLinks {...props} apiPath={apiPath} selfUser={selfUser} />
 							)}
 						/>
 						<Route
