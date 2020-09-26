@@ -1,0 +1,22 @@
+{
+	"subjectName": "Mathematics",
+	"topics": [
+		{
+			"topicName": "Algebra",
+			//the urls are playlists with a ton of specific chapters that students can just scroll through, so no arrays needed
+			"urls": "https://www.youtube.com/watch?v=MHeirBPOI6w&list=PL0o_zxa4K1BUeF2o-MlNpbRiS-oE2Kn6J"
+		},
+		{
+			"topicName": "Geometry",
+			"urls": "https://www.youtube.com/watch?v=w8wdKOsUD-4&list=PL0o_zxa4K1BVkRxCZubMPcCJ5Q5QwZdEM"
+		},
+		{
+			"topicName": "Pre-Calc",
+			"urls": "https://www.youtube.com/watch?v=DrEXTC6mIO8&list=PL0o_zxa4K1BU5sTWZ2YxFhpXwsnMfMke7"
+		},
+		{
+			"topicName": "Calc",
+			"urls": "https://www.youtube.com/watch?v=1xATmTI-YY8&list=PL0o_zxa4K1BWYThyV4T2Allw6zY0jEumv"
+		}
+	]
+}
