@@ -1,0 +1,23 @@
+{
+	"subjectName": "History",
+	"topics": [
+		{
+			"topicName": "US History",
+			"urls": "https://www.youtube.com/watch?v=u4b_KmmUR8Q&list=PL8dPuuaLjXtMwmepBjTSG593eG7ObzO7s&index=1&ab_channel=CrashCourse"
+		},
+		{
+			"topicName": "European History",
+			"urls": "https://www.youtube.com/watch?v=WhtuC9dp0Hk&list=PL8dPuuaLjXtMsMTfmRomkVQG8AqrAmJFX"
+		},
+		{
+			"topicName": "US Government/Politics",
+			"urls": "https://www.youtube.com/watch?v=lrk4oY7UxpQ&list=PL8dPuuaLjXtOfse2ncvffeelTrqvhrz8H" 
+		},
+		{
+			"topicName": "World History",
+			"urls": "https://www.youtube.com/watch?v=Yocja_N5s1I&list=PLBDA2E52FB1EF80C9&ab_channel=CrashCourse"
+
+		}
+	]
+}
+}
