@@ -1,29 +1,36 @@
 # engage
-
-### Commands & Setup
-Need to make sure MongoDB is running
-- cd C:\Program Files\MongoDB\Server\4.2\bin
-- mongod.exe 
-	-> starts MongoDB
-- mongo
-	-> cmd line access to MongoDB database
+### Description
 
 
-Main directory: Run Server
-- npm install 
-	->downloads dependencies on local machine
-- create .env file
-	- same content as .env.sample file
-- npx nodemon
-	-> run server, should get "Server running on port 3000"
-- CTRL-C to exit
+### Installation & Setup
+#### MongoDB
+1. Navigate to MongoDB folder in Command Prompt or VSCode Terminal
+	- ```cd C:\Program Files\MongoDB\Server\4.2\bin```
+2. Run MongoDB
+	- ```mongod.exe```
+3. Access MongoDB via cmd
+	- ```mongo```
 
-/frontend: Run frontend
-- cd frontend
-- npm install
-- npm start
-- enter localhost:3000 on browser
+#### Server
+1. Navigate to engage directory 
+2. Download dependencies
+	- ```npm install```
+3. Create .env file in base directory
+	- Could just copy contents from .env.sample file
+	- MONGO_ATLAS is required if connecting to MongoDB Atlas
+4. Run Server
+	- ```npx nodemon```
+	- Should get "Server up and running on port 3030" and "MongoDB successfully connected"
+5. CTRL-C to exit
 
+#### Frontend
+1. Navigate to /frontend
+	- ```cd frontend```
+2. Download dependencies
+	- ```npm install```
+3. Run frontend
+	- ```npm start```
+4. Enter localhost:3000 on browser
+
+### References
 https://react.semantic-ui.com/
-
-https://coursework.vschool.io/deploying-mern-with-heroku/
