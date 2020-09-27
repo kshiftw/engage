@@ -1,8 +1,7 @@
 :root {
   --background: #3f704d;
   --text: #474747;
-  --secondText: #50c878;
-  --match: ;
+  --secondText: rgb(86, 182, 174);
 }
 
 .container.app_container {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import "./App.css";
 
-import profile from "./images/tree_5.JPG";
+import profile from "./images/avatar.png";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";

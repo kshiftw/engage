@@ -19,13 +19,13 @@ export default class Landing extends PureComponent {
             <h1>Engage</h1>
             <p>Engage is an Web App meant to engage students in learning</p>
           </div>
-          <a href="">
+          <a href="#engage-about">
             <div className="scroll-indicator">
               <span></span>
             </div>
           </a>
         </header>
-        <div className="engage-content">
+        <div id="engage-about" className="engage-content">
           <p>
             In this day and age, remaining on task can prove to be quite
             difficult. A lot of our favorite distractions and leisurely

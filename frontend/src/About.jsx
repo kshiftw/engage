@@ -15,11 +15,15 @@ export default class About extends PureComponent {
         <p>{person.info}</p>
       </div>
     ));
-    console.log(about);
+
     return (
       <Fragment>
-        <h1 class="meet-team">Meet the team</h1>
-        <p>Some description.....</p>
+        <h1 class="meet-team" style={{ textAlign: "center" }}>
+          Meet the team
+        </h1>
+        <p style={{ textAlign: "center" }}>
+          This project is a collaboration with the following programmers:
+        </p>
         <Container>
           <div className="users-container">{about}</div>
         </Container>
