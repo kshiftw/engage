@@ -10,7 +10,8 @@ export default class Profile extends PureComponent {
 
 		this.state = {
 			username: selfUser.username,
-			totalTime: 0,
+			minutes: 0,
+			hours: 0,
 			level: 0,
 		};
 	}
@@ -22,8 +23,14 @@ export default class Profile extends PureComponent {
 				`${apiPath}/profile?username=${selfUser.username}`
 			);
 			const { user } = await res.json();
+
+			let minutes = Math.floor((user.totalTime / (1000 * 60)) % 60);
+			let hours = Math.floor((user.totalTime / (1000 * 60 * 60)) % 24);
+			// convert milliseconds to minutes/hours
+
 			this.setState({
-				totalTime: user.totalTime,
+				minutes: minutes,
+				hours: hours,
 				level: user.level,
 			});
 		} catch (err) {
@@ -33,7 +40,7 @@ export default class Profile extends PureComponent {
 
 	render() {
 		const { selfUser } = this.props;
-		const { username, totalTime, level } = this.state;
+		const { username, minutes, hours, level } = this.state;
 
 		if (!selfUser) {
 			return <Redirect to='/' />;
@@ -48,7 +55,9 @@ export default class Profile extends PureComponent {
 						<Card.Header textAlign={'center'}>{username}</Card.Header>
 					</Card.Content>
 					<Card.Content>
-						<Card.Description>Total Time Studied: {totalTime}</Card.Description>
+						<Card.Description>
+							Total Time Studied: {hours} hours {minutes} minutes
+						</Card.Description>
 						<Card.Description>Level: {level}</Card.Description>
 					</Card.Content>
 				</Card>
