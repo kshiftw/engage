@@ -11,9 +11,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 // distinguish api calls by using /api as prefix
 app.use('/api', require('./routes/index'));
+
+app.use('*', (req, res) =>
+	res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+);
 
 // Connect to MongoDB Database
 const mongoUrl = process.env.MONGO_URL;
