@@ -50,4 +50,5 @@ Engage is a web application developed as part of the ShellHacks 2020 hackathon. 
 
 ### References
 https://react.semantic-ui.com/
+
 https://codepen.io/daybrush/pen/EQPPBg
