@@ -12,7 +12,7 @@ export default class Navbar extends PureComponent {
 		const { selfUser, setSelfUser } = this.props;
 
 		return (
-			<div>
+			<div className='nav-container'>
 				<Menu
 					tabular
 					// style={{ fontSize: '120%' }}
@@ -53,18 +53,18 @@ export default class Navbar extends PureComponent {
 								Grow
 							</Menu.Item>
 						) : null}
-						{selfUser ? (
-							<Menu.Item
-								as={NavLink}
-								exact
-								to='/EducationalLinks'
-								name='EducationalLinks'
-								active={activeItem === 'EducationalLinks'}
-								onClick={this.handleItemClick}
-							>
-								Educational Links
-							</Menu.Item>
-						) : null}
+						{/* {selfUser ? (
+              <Menu.Item
+                as={NavLink}
+                exact
+                to="/EducationalLinks"
+                name="EducationalLinks"
+                active={activeItem === "EducationalLinks"}
+                onClick={this.handleItemClick}
+              >
+                Educational Links
+              </Menu.Item>
+            ) : null} */}
 						{selfUser ? (
 							<Menu.Item
 								as={NavLink}

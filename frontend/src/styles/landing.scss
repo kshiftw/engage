@@ -1,0 +1,280 @@
+@mixin fontAwesome {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@mixin centre($axis: "both") {
+  position: absolute;
+  @if $axis == "y" {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  @if $axis == "x" {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  @if $axis == "both" {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-51%, -50%);
+    -moz-transform: translate(-51%, -50%);
+    -ms-transform: translate(-51%, -50%);
+    -o-transform: translate(-51%, -50%);
+    transform: translate(-51%, -50%);
+  }
+}
+
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: "";
+
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
+
+    @if $i < $max {
+      $animations: #{$animations + ", "};
+    }
+  }
+  -webkit-animation: $animations;
+  -moz-animation: $animations;
+  -o-animation: $animations;
+  animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at center, #000000 0%, #181818 100%);
+  height: 100vh;
+  width: 100vw;
+  font-family: "Open Sans", arial, sans-serif;
+  min-width: 991px;
+}
+
+header {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  min-height: 450px;
+
+  .e-text {
+    @include centre();
+    width: 700px;
+    text-align: center;
+    color: #fff;
+    z-index: 500;
+
+    .e-subtitle {
+      text-transform: uppercase;
+      font-family: "Roboto", arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 90px;
+      line-height: 90px;
+      padding: 20px 0;
+      border-top: 2px solid rgba(255, 255, 255, 0.8);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+      display: inline-block;
+      margin: 20px 0;
+      z-index: 200;
+      font-weight: 900;
+      font-family: "Lato", arial, sans-serif;
+
+      @supports (-webkit-background-clip: text) {
+        background: radial-gradient(
+          ellipse at center,
+          #a53535 0%,
+          #a60707 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    p {
+      width: 80%;
+      color: #fff;
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 300;
+      display: inline-block;
+      margin: 0;
+    }
+  }
+
+  .e-particles {
+    @include centre();
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: block;
+    opacity: 0.1;
+    z-index: 100;
+
+    &#particleCanvas-Red {
+      opacity: 0.8;
+      height: 100%;
+      width: 600px;
+    }
+  }
+
+  .e-outercircles,
+  .e-innercircles {
+    width: 1920px;
+    height: 1920px;
+    position: absolute;
+    margin-top: -960px;
+    margin-left: -960px;
+    transform-origin: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 50;
+    top: 50%;
+    left: 50%;
+    z-index: 80;
+    opacity: 1;
+  }
+
+  .e-innercircles {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/670230/innerCircle.png");
+    background-size: 100% auto;
+  }
+
+  .e-outercircles {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/670230/outerCircle.png");
+    background-size: 100% auto;
+  }
+
+  .scroll-indicator {
+    @include keyframes(desktopScroll) {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      60% {
+        transform: translate(0, 15px);
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(0, 0);
+      }
+    }
+    @include centre(x);
+    position: absolute;
+    bottom: 42px;
+    z-index: 100;
+    display: inline-block;
+    color: #fff;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 18px;
+      height: 34px;
+      margin-left: -9px;
+      border: 1px solid #fff;
+      border-radius: 50px;
+      box-sizing: border-box;
+    }
+
+    span::before {
+      @include animation("desktopScroll 2s infinite");
+      animation-delay: 3s;
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      content: "";
+      width: 2px;
+      height: 8px;
+      margin-left: -1px;
+      background-color: #fff;
+      border-radius: 1px;
+
+      box-sizing: border-box;
+    }
+
+    @media (pointer: coarse) {
+      @include keyframes(mobileScroll) {
+        0% {
+          transform: translate(0, 30px);
+          opacity: 0;
+        }
+        40% {
+          opacity: 1;
+        }
+        80% {
+          transform: translate(0, 0px);
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      span {
+        top: -20px;
+        width: 40px;
+        height: 70px;
+        margin-left: -20px;
+        border-radius: 5px;
+        &:before {
+          @include fontAwesome;
+          content: "\f25a";
+          background: none;
+          font-size: 20px;
+          margin-left: -10px;
+          @include animation("mobileScroll 2s infinite");
+        }
+
+        &:after {
+          @include centre();
+          content: " ";
+          display: block;
+          width: 30px;
+          height: 60px;
+          border: 1px solid #fff;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}

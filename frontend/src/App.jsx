@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import './App.css';
+
+import profile from './images/avatar.png';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
@@ -16,7 +19,28 @@ export default class App extends PureComponent {
 	constructor(props) {
 		super(props);
 	}
-
+	about = [
+		{
+			name: 'Mihir',
+			profilePicture: profile,
+			info: 'Student of Computer Science at Western University',
+		},
+		{
+			name: 'Lenny',
+			profilePicture: profile,
+			info: 'Electrical Engineering at FIU',
+		},
+		{
+			name: 'Kirk',
+			profilePicture: profile,
+			info: 'Computer Systems Technology student at BCIT',
+		},
+		{
+			name: 'Israel',
+			profilePicture: profile,
+			info: 'Student of Computer Science at Hunter College',
+		},
+	];
 	state = {
 		// REACT_APP_API_PATH = localhost:3030 // <- use this when running in local environment to avoid building frontend
 		apiPath: process.env.REACT_APP_API_PATH + '/api',
@@ -27,6 +51,7 @@ export default class App extends PureComponent {
 		selfUser: null,
 		loadingSelf: true,
 		inLobby: false,
+		about: this.about,
 	};
 
 	async componentDidMount() {
@@ -69,7 +94,7 @@ export default class App extends PureComponent {
 	}
 
 	render() {
-		const { apiPath, selfUser, loadingSelf } = this.state;
+		const { apiPath, selfUser, loadingSelf, about } = this.state;
 
 		// If still loading, render a loader on the page
 		if (loadingSelf) {
@@ -106,7 +131,12 @@ export default class App extends PureComponent {
 							exact
 							path='/about'
 							render={(props) => (
-								<About {...props} apiPath={apiPath} selfUser={selfUser} />
+								<About
+									{...props}
+									apiPath={apiPath}
+									selfUser={selfUser}
+									about={about}
+								/>
 							)}
 						/>
 						<Route

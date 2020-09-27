@@ -167,54 +167,51 @@ export default class Grow extends PureComponent {
 
 		return (
 			<Fragment>
-				<h1>Grow</h1>
+				<div className='timer-container'>
+					<h1>Grow</h1>
 
-				{timer_started ? (
-					<p>
-						{hour_remaining}:{minute_remaining}:{second_remaining}{' '}
+					{timer_started ? (
+						<p className='time'>
+							{hour_remaining}:{minute_remaining}:{second_remaining}{' '}
+						</p>
+					) : (
+						<p className='time'>00:00:00</p>
+					)}
+					<p className='hours-minutes'>
+						Hours &nbsp;
+						<NumericInput
+							min={0}
+							max={24}
+							placeholder={0}
+							size={3}
+							onChange={this.onHourChange.bind(this)}
+						/>
+						&nbsp;&nbsp;&nbsp;&nbsp; Minutes &nbsp;
+						<NumericInput
+							min={0}
+							max={60}
+							placeholder={0}
+							size={3}
+							onChange={this.onMinuteChange.bind(this)}
+						/>
 					</p>
-				) : (
-					<p>00:00:00</p>
-				)}
-				<p>
-					Hours &nbsp;
-					<NumericInput
-						min={0}
-						max={24}
-						placeholder={0}
-						size={3}
-						onChange={this.onHourChange.bind(this)}
-					/>
-					&nbsp;&nbsp;&nbsp;&nbsp; Minutes &nbsp;
-					<NumericInput
-						min={0}
-						max={60}
-						placeholder={0}
-						size={3}
-						onChange={this.onMinuteChange.bind(this)}
-					/>
-				</p>
-				{!timer_started ? (
-					<Button onClick={this.startCountDown}>Start</Button>
-				) : (
-					<Button disabled>Start</Button>
-				)}
+					<p></p>
+					<div className='start-reset'>
+						{!timer_started ? (
+							<Button onClick={this.startCountDown}>Start</Button>
+						) : (
+							<Button disabled>Start</Button>
+						)}
 
-				{timer_started ? (
-					<Button onClick={this.resetTimer}>Reset</Button>
-				) : (
-					<Button disabled>Reset</Button>
-				)}
+						{timer_started ? (
+							<Button onClick={this.resetTimer}>Reset</Button>
+						) : (
+							<Button disabled>Reset</Button>
+						)}
+					</div>
+				</div>
 
-				<div
-					style={{
-						width: '500px',
-						position: 'absolute',
-						left: '50%',
-						top: '50%',
-						transform: 'translate(-50%, -50%)',
-					}}
-				>
+				<div className='progressbar-container'>
 					<CircularProgressbarWithChildren
 						value={timer_percentage}
 						strokeWidth={5}
