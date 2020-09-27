@@ -40,16 +40,32 @@ export default class Grow extends PureComponent {
     this.setState({ minute: event });
   }
 
-  tick() {
+  async updateTimer(time_elapsed, username) {
+	const { apiPath } = this.props;
+
+	const res = await fetch(`${apiPath}/update_timer`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			username,
+			time_elapsed,
+		}),
+	});
+	if (!res.ok) throw await res.json();
+
+	return await res.json();
+}
+
+async tick() {
+	const { selfUser } = this.props;
+	let username = selfUser.username;
     this.setState((prevState) => {
       return { timer_remaining: prevState.timer_remaining - 1000 };
     });
 
     const { timer_set, timer_remaining } = this.state;
-
-    if (timer_remaining <= 0) {
-      clearInterval(this.intervalHandle);
-    }
 
     // https://stackoverflow.com/questions/19700283/how-to-convert-time-milliseconds-to-hours-min-sec-format-in-javascript
     let minutes = Math.floor((timer_remaining / (1000 * 60)) % 60);
@@ -72,7 +88,19 @@ export default class Grow extends PureComponent {
       hour_remaining: hours,
       minute_remaining: minutes,
       second_remaining: seconds,
-    });
+	});
+	
+	if (timer_remaining <= 0) {
+		clearInterval(this.intervalHandle);
+		// store timer_set into db
+		// send username and time elapsed
+
+		try {
+			await this.updateTimer(timer_set, username);
+		} catch (err) {
+			console.log(err);
+		}
+	}
   }
 
   startCountDown() {
@@ -84,21 +112,30 @@ export default class Grow extends PureComponent {
       timer_started: true,
     });
 
-    this.intervalHandle = setInterval(this.tick, 200);
+    this.intervalHandle = setInterval(this.tick, 1000);
   }
 
-  resetTimer() {
-    clearInterval(this.intervalHandle);
+async resetTimer() {
+	clearInterval(this.intervalHandle);
+	const { selfUser } = this.props;
+	let username = selfUser.username;
 
-    this.setState({
-      timer_remaining: 0,
-      timer_percentage: 0,
-      hour_remaining: 0,
-      minute_remaining: 0,
-      second_remaining: 0,
-      timer_started: false,
-    });
-  }
+	const { timer_set, timer_remaining } = this.state;
+	this.setState({
+		timer_remaining: 0,
+		timer_percentage: 0,
+		hour_remaining: 0,
+		minute_remaining: 0,
+		second_remaining: 0,
+		timer_started: false,
+	});
+
+	try {
+		await this.updateTimer(timer_set - timer_remaining, username);
+	} catch (err) {
+		console.log(err);
+	}
+} 
 
   render() {
     const { selfUser } = this.props;

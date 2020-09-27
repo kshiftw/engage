@@ -41,7 +41,7 @@ export default class Navbar extends PureComponent {
             >
               About
             </Menu.Item>
-            {!selfUser ? (
+            {selfUser ? (
               <Menu.Item
                 as={NavLink}
                 exact
