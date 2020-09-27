@@ -32,7 +32,4 @@ mongoose
 	.catch((err) => console.log(err));
 
 const port = process.env.PORT || 5000;
-const host = '0.0.0.0';
-app.listen(port, host, () =>
-	console.log(`Server up and running on port ${port} !`)
-);
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));
