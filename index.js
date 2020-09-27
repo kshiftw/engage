@@ -21,7 +21,7 @@ app.use('*', (req, res) =>
 );
 
 // Connect to MongoDB Database
-const mongoUrl = process.env.MONGO_URL;
+const mongoUrl = process.env.MONGO_ATLAS || 'mongodb://localhost:27017/engage';
 mongoose
 	.connect(mongoUrl, {
 		useNewUrlParser: true,
