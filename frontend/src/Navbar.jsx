@@ -53,7 +53,7 @@ export default class Navbar extends PureComponent {
 								Grow
 							</Menu.Item>
 						) : null}
-						{selfUser ? (
+						{/* {selfUser ? (
 							<Menu.Item
 								as={NavLink}
 								exact
@@ -64,7 +64,7 @@ export default class Navbar extends PureComponent {
 							>
 								Educational Links
 							</Menu.Item>
-						) : null}
+						) : null} */}
 						{selfUser ? (
 							<Menu.Item
 								as={NavLink}
