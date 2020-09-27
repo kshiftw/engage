@@ -1,0 +1,36 @@
+.users-container {
+  padding: 2rem;
+  margin: 0 auto;
+  --columns: 4;
+  max-width: 800px;
+  justify-items: center;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+.users-container > .user-card {
+  display: grid;
+
+  justify-items: center;
+  gap: 0.5rem;
+  width: 200px;
+}
+.user-card {
+}
+/* tablet */
+@media all and (max-width: 800px) {
+  .users-container {
+    --columns: 2;
+  }
+}
+
+/* mobile */
+
+@media all and (max-width: 500px) {
+  .users-container {
+    --columns: 1;
+  }
+  .user-card {
+    max-width: 80%;
+  }
+}

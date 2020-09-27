@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+:root {
+  --background: #3f704d;
+  --text: #474747;
+  --secondText: rgb(86, 182, 174);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container.app_container {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  margin-bottom: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-container {
+  justify-self: stretch;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+  max-height: 3rem;
+  background: rgb(190, 190, 190);
+  padding-right: 1rem;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-container .navbar_items a {
+  transition: color 0.4s ease !important;
+  font-size: 1.1rem;
+}
+.nav-container .navbar_items a:hover {
+  color: var(--secondText) !important;
+}
+.container.app_container .nav-container + * {
+  padding-top: 5rem;
+}
+.timer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.timer-container > * {
+  margin-bottom: 1rem;
+}
+.timer-container .time {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+.timer-container h1 {
+  font-size: 3rem;
+  color: var(--secondText);
+  font-weight: 100;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-.App-link {
-  color: #61dafb;
+.timer-container button {
+  font-weight: 100 !important;
+  transition: background 0.4s ease !important;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timer-container button:hover {
+  background: var(--secondText) !important;
+}
+.timer-container .hours-minutes {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.progressbar-container {
+  margin: 0 auto;
+  width: 500px;
+}
+.meet-team {
+  color: var(--secondText);
+  font-weight: 100;
+  text-decoration: underline;
 }
