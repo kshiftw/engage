@@ -30,7 +30,29 @@ export default class Grow extends PureComponent {
 		hour: 0,
 		minute: 0,
 		timer_started: false,
+
+		weather: "",
+		quotes: []
 	};
+
+	async componentDidMount() {
+		let lat, long;
+		const APIkey = "4e0f76db4876c9627498ec6fdaeb159a";
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				lat = position.coords.latitude;
+				long = position.coords.longitude;
+			  });
+		  }
+		let [weatherJSON, quotesArr] = await Promise.all([
+			fetch(`api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIkey}`),
+			fetch("https://type.fit/api/quotes")
+		]);
+		this.setState({
+			weather: weatherJSON,
+			quotes: quotesArr
+		});
+	}
 
 	onHourChange(event) {
 		this.setState({ hour: event });
