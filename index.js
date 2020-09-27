@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 // distinguish api calls by using /api as prefix
 app.use('/api', require('./routes/index'));
 
-app.use('*', (req, res) =>
+app.use('/*', (req, res) =>
 	res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
 );
 
