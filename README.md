@@ -23,7 +23,7 @@
 	- Should get "Server up and running on port 3030" and "MongoDB successfully connected"
 5. CTRL-C to exit
 
-#### Frontend
+#### Option 1: Frontend runs separately (for easier development)
 1. Navigate to /frontend
 	- ```cd frontend```
 2. Download dependencies
@@ -31,6 +31,15 @@
 3. Run frontend
 	- ```npm start```
 4. Enter localhost:3000 on browser
+
+#### Option 2: Backend hosts frontend (for deployment)
+1. Navigate to /frontend
+	- ```cd frontend```
+2. Download dependencies
+	- ```npm install```
+2. Build
+	- ```npm run build```
+4. Enter localhost:3030 on browser (the server now hosts frontend build)
 
 ### References
 https://react.semantic-ui.com/
