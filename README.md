@@ -1,8 +1,6 @@
 # engage
 ### Description
-
-
-https://engageshell.herokuapp.com/
+Engage is a web application developed as part of the ShellHacks 2020 hackathon. It is a platform designed to engage students in their online learning by providing incentives to set study timers and achieve their goals. Try it out! https://engageshell.herokuapp.com/
 
 ### Installation & Setup
 #### MongoDB
