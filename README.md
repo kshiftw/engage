@@ -2,6 +2,13 @@
 ### Description
 Engage is a web application developed as part of the ShellHacks 2020 hackathon. It is a platform designed to engage students in their online learning by providing incentives to set study timers and achieve their goals. Try it out! https://engageshell.herokuapp.com/
 
+### Tools & Technologies
+- MongoDB
+- Express
+- React
+- Node
+- Heroku
+
 ### Installation & Setup
 #### MongoDB
 1. Navigate to MongoDB folder in Command Prompt or VSCode Terminal
